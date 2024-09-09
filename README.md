@@ -1,0 +1,1 @@
+Database for keeping track of comic inventory. With this I hope to be able to easily search for comics I own and their condition, search for a character and find publication information about them, and search for an author and find titles they've written, among other things. 
