@@ -24,8 +24,9 @@ DROP TABLE IF EXISTS `Artist`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Artist` (
   `PersonID` varchar(10) NOT NULL,
+  `Inker` varchar(3) DEFAULT NULL,
   PRIMARY KEY (`PersonID`),
-  CONSTRAINT `Artist_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `Artist_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -35,6 +36,7 @@ CREATE TABLE `Artist` (
 
 LOCK TABLES `Artist` WRITE;
 /*!40000 ALTER TABLE `Artist` DISABLE KEYS */;
+INSERT INTO `Artist` VALUES ('OCCJAKI','No'),('OCCJILE','Yes'),('OCCJOBY','Yes'),('OCCSTDI','No'),('OCCTOMC','Yes');
 /*!40000 ALTER TABLE `Artist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -47,8 +49,11 @@ DROP TABLE IF EXISTS `Author`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Author` (
   `PersonID` varchar(10) NOT NULL,
+  `StartingCompany` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`PersonID`),
-  CONSTRAINT `Author_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `Author_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Author_ibfk_2` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Author_ibfk_3` FOREIGN KEY (`PersonID`) REFERENCES `Person` (`PersonID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,6 +63,7 @@ CREATE TABLE `Author` (
 
 LOCK TABLES `Author` WRITE;
 /*!40000 ALTER TABLE `Author` DISABLE KEYS */;
+INSERT INTO `Author` VALUES ('OCCDAMI','DC'),('OCCJOBY','Marvel'),('OCCSTALE','Marvel');
 /*!40000 ALTER TABLE `Author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,6 +89,7 @@ CREATE TABLE `ComicCharacter` (
 
 LOCK TABLES `ComicCharacter` WRITE;
 /*!40000 ALTER TABLE `ComicCharacter` DISABLE KEYS */;
+INSERT INTO `ComicCharacter` VALUES ('CHIDJEGR','Jean','Grey','Marvel Girl'),('CHIDSCSU','Scott','Summers','Cyclops');
 /*!40000 ALTER TABLE `ComicCharacter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,9 +111,9 @@ CREATE TABLE `Issue` (
   KEY `SeriesID` (`SeriesID`),
   KEY `Author` (`Author`),
   KEY `Artist` (`Artist`),
-  CONSTRAINT `Issue_ibfk_1` FOREIGN KEY (`SeriesID`) REFERENCES `Series` (`SeriesID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `Issue_ibfk_2` FOREIGN KEY (`Author`) REFERENCES `Author` (`PersonID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `Issue_ibfk_3` FOREIGN KEY (`Artist`) REFERENCES `Artist` (`PersonID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `Issue_ibfk_1` FOREIGN KEY (`SeriesID`) REFERENCES `Series` (`SeriesID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `Issue_ibfk_2` FOREIGN KEY (`Author`) REFERENCES `Author` (`PersonID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `Issue_ibfk_3` FOREIGN KEY (`Artist`) REFERENCES `Artist` (`PersonID`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -116,6 +123,7 @@ CREATE TABLE `Issue` (
 
 LOCK TABLES `Issue` WRITE;
 /*!40000 ALTER TABLE `Issue` DISABLE KEYS */;
+INSERT INTO `Issue` VALUES ('IIDXMVOL1I1',NULL,1963,NULL,NULL,1),('IIDXMVOL2I1',NULL,1992,NULL,NULL,1);
 /*!40000 ALTER TABLE `Issue` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,8 +139,8 @@ CREATE TABLE `Issue_Character` (
   `IssueID` varchar(20) NOT NULL,
   PRIMARY KEY (`CharacterID`,`IssueID`),
   KEY `IssueID` (`IssueID`),
-  CONSTRAINT `Issue_Character_ibfk_1` FOREIGN KEY (`CharacterID`) REFERENCES `ComicCharacter` (`CharacterID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `Issue_Character_ibfk_2` FOREIGN KEY (`IssueID`) REFERENCES `Issue` (`IssueID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `Issue_Character_ibfk_1` FOREIGN KEY (`CharacterID`) REFERENCES `ComicCharacter` (`CharacterID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Issue_Character_ibfk_2` FOREIGN KEY (`IssueID`) REFERENCES `Issue` (`IssueID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -167,6 +175,7 @@ CREATE TABLE `Person` (
 
 LOCK TABLES `Person` WRITE;
 /*!40000 ALTER TABLE `Person` DISABLE KEYS */;
+INSERT INTO `Person` VALUES ('OCCALMO',NULL,NULL,NULL),('OCCDAMI',NULL,NULL,NULL),('OCCHCL','Chris','Claremont','US'),('OCCJAKI',NULL,NULL,NULL),('OCCJILE',NULL,NULL,NULL),('OCCJOBY',NULL,NULL,NULL),('OCCSTALE','Stan','Lee','US'),('OCCSTDI',NULL,NULL,NULL),('OCCTOMC',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,6 +201,7 @@ CREATE TABLE `Series` (
 
 LOCK TABLES `Series` WRITE;
 /*!40000 ALTER TABLE `Series` DISABLE KEYS */;
+INSERT INTO `Series` VALUES ('SIDXM1','X-Men',1,1963),('SIDXM2','X-Men',2,1992);
 /*!40000 ALTER TABLE `Series` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,6 +225,7 @@ CREATE TABLE `SeriesTitle` (
 
 LOCK TABLES `SeriesTitle` WRITE;
 /*!40000 ALTER TABLE `SeriesTitle` DISABLE KEYS */;
+INSERT INTO `SeriesTitle` VALUES ('SIDXM1','Uncanny X-Men'),('SIDXM2','X-Men');
 /*!40000 ALTER TABLE `SeriesTitle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -227,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-11 20:45:47
+-- Dump completed on 2024-10-14  3:31:21
