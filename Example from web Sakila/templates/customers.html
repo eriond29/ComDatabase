@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+</head>
+<body>
+    <h1>Customer List</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Address ID</th>
+            <th>Create Date</th>
+        </tr>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.customer_id }}</td>
+            <td>{{ customer.first_name }}</td>
+            <td>{{ customer.last_name }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.address_id }}</td>
+            <td>{{ customer.create_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{{ url_for('add_customer') }}">Add New Customer</a>
+</body>
+</html>
