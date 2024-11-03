@@ -1,20 +1,22 @@
 #!/usr/bin/python3
 
 from flask import Flask, render_template, request
-import mysql.connector
+import mysql.connector, os
 import json
-import os
+
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET'])
+
+
 def showSpeakers():
-    # Load credentials
     with open('/home/googlabill/ComDatabase/HTML_From_Server/secrets.json', 'r') as secretFile:
         creds = json.load(secretFile)['mysqlCredentials']
 
-    # Establish a database connection
     connection = mysql.connector.connect(**creds)
+    
     mycursor = connection.cursor()
 
     try:
@@ -40,7 +42,7 @@ def showSpeakers():
         connection.close()
 
     # Render the template with fetched data
-    return render_template('actor-list.html', collection=myresult)
+    return render_template('characterlist.html', collection=myresult)
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True, host="0.0.0.0")
