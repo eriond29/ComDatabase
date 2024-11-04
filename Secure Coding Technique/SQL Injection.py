@@ -6,17 +6,14 @@ import mysql.connector, os
 
 app = Flask(__name__)
 
+db_config
 
 @app.route('/', methods=['GET'])
 def showTable():
     """This is vulnerable to the following SQL injection:
     http://localhost:8000/?id=1' or 1=1 --%20"""
-    connection = mysql.connector.connect(
-        host=os.environ['localhost'],
-        user=os.environ['stephen'],
-        password=os.environ['database'],
-        db=os.environ['sakila']
-    )
+    connection = mysql.connector.connect(**db_config)
+    
     mycursor = connection.cursor()
 
     id = request.args.get('id')

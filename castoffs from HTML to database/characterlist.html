@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+Comic Character
+{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>CharacterID</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Monicker</th>
+
+  </tr>
+  {% for row in collection %}
+  <tr>
+    <td>
+      {{row[0]}}
+    </td>
+    <td>
+      {{row[1]}}
+    </td>
+    <td>
+      {{row[2]}}
+    </td>
+    <td>
+      {{row[3]}}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}
