@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+Updating Sakila Actor
+{% endblock %}
+
+{% block content %}
+
+<h2>Enter a new value here</h2>
+<form action="">
+  <input type="hidden" name="id" value="{{id}}">
+  First Name: <input type="text" name="first_name" value="{{existingFirst}}"><br />
+  Last Name: <input type="text" name="last_name" value="{{existingLast}}" /><br />
+  <input type="submit" value="Submit">
+</form>
+<a href="/">Return to list</a>
+{% endblock %}

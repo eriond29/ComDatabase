@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block header %}
+Comic Character
+{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>CharacterID</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Monicker</th>
+    <th>Maintenance</th>
+  </tr>
+  {% for row in collection %}
+  <tr>
+    <td>
+      {{row[0]}}
+    </td>
+    <td>
+      {{row[1]}}
+    </td>
+    <td>
+      {{row[2]}}
+    </td>
+    <td>
+      {{row[3]}}
+    </td>
+
+    <td>
+      <a href="?delete=true&id={{row[0]}}">Delete</a><br />
+      <a href="/ComicCharacter-update?id={{row[0]}}">Change</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<h2>Insert a new value here</h2>
+<form action="">
+  CharacterID: <input type="text" name="characterid"><br />
+  FirstName: <input type="text" name="firstname"><br />
+  LastName: <input type="text" name="lastname"><br />
+  Monicker: <input type="text" name="monicker"><br />
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}
