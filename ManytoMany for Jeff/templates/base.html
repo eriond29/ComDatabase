@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+
+<head>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <title>{% block title %}{% endblock %} - CharacterJoin</title>
+</head>
+
+<body>
+   <h1>
+      {% block header %}{% endblock %}
+   </h1>
+   {% block content %}{% endblock %}
+   <p><a href="/showCharacters">Show all Characters</a></p>
+   <p><a href="/showIssues">Show all Issues</a></p>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Showing Issues{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>IssueID</th>
+    <th>SeriesID</th>
+    <th>Year</th>
+    <th>AuthorID</th>
+    <th>ArtistID</th>
+    <th>Issue Number</th>
+  </tr>
+  {% for issue in issueList %}
+  <tr>
+    <td>
+      {{issue[0]}}
+    </td>
+    <td>
+      {{issue[1]}}
+    </td>
+    <td>
+      {{issue[2]}}
+    </td>
+    <td>
+      {{issue[3]}}
+    </td>
+    <td>
+      {{issue[4]}}
+    </td>
+    <td>
+      {{issue[5]}}
+    </td>
+    
+    <td>
+      <a href="/showCharacters?IssueID={{issue[0]}}">View all characters in this issue</a><br />
+    </td>
+    
+  
+  </tr>
+  {% endfor %}
+</table>
+
+{% if otherIssues %}
+<form method="get" action="/showIssues">
+  <select name="IssueID" required>
+    <option>add to an existing issue</option>
+    {% for otherIssue in otherIssues %}
+    <option value="{{ otherIssue[0] }}">{{otherIssue[1]}} Issue {{otherIssue[2]}} 
+    </option>
+    {% endfor %}
+  </select>
+  <button type="submit" value="IssueID">Add character appearance to selected issue</button>
+  <input type="hidden" name="CharacterID" value="{{ CharacterID }}" />
+</form>
+{% endif %}
+
+{% endblock %}
