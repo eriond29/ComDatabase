@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+Updating Issue Info
+{% endblock %}
+
+{% block content %}
+
+<h2>Enter new values here</h2>
+<form action="{{ url_for('updateIssues') }}" method="GET">
+  IssueID: <input type="text" name="IssueID" value="{{existingIssueID}}"><br />
+  SeriesID: <input type="text" name="SeriesID" value="{{existingSeriesID}}"><br />
+  Year: <input type="text" name="Year" value="{{existingYear}}" /><br />
+  AuthorID: <input type="text" name="Author" value="{{existingAuthor}}"><br />
+  ArtistID: <input type="text" name="Artist" value="{{existingArtist}}"><br />
+  IssueNumber: <input type="text" name="IssueNumber" value="{{existingIssueNumber}}"><br />
+
+  
+
+
+  <input type="submit" value="Submit">
+</form>
+<!--<a href="/">Return to Front Page</a>-->
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+Updating Comic Character
+{% endblock %}
+
+{% block content %}
+
+<h2>Enter a new value here</h2>
+<form action="">
+  <!--<input type="hidden" name="CharacterID" value="{{CharacterID}}">-->
+  CharacterID: <input type="text" name="CharacterID" value="{{existingID}}"><br />
+  First Name: <input type="text" name="FirstName" value="{{existingFirst}}"><br />
+  Last Name: <input type="text" name="LastName" value="{{existingLast}}" /><br />
+  Monicker: <input type="text" name="Monicker" value="{{existingMonicker}}"><br />
+
+  <input type="submit" value="Submit">
+</form>
+<a href="/">Return to Front Page</a>
+{% endblock %}

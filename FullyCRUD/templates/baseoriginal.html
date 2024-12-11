@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+
+<head>
+<!-- Reference the CSS file -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>{% block title %}Stephen's Comic Want List{% endblock %}</title>
+
+
+</head>
+
+<body> 
+   <h1>
+      {% block header %}Show Me the Comics{% endblock %}
+   </h1>
+   <p><a href="/showCharacters" style="margin-right: 10px;">Show all Characters</a> <a href="/showIssues">Show all Issues</a> </p>
+   {% block content %}{% endblock %}
+
+</body>
+
+</html>
+

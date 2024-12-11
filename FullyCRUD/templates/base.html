@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Stephen's Comic Want List{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>{% block header %}Show Me the Comics{% endblock %}</h1>
+    <p>
+        <a href="/showCharacters" style="margin-right: 10px;">Show all Characters</a>
+        <a href="/showIssues">Show all Issues</a>
+    </p>
+    {% block content %}{% endblock %}
+</body>
+
+</html>

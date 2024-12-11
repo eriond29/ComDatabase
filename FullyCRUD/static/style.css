@@ -1,0 +1,37 @@
+html, body {
+  height: 100%; /* Ensure both HTML and body take up the full height */
+  margin: 0; /* Remove default margin */
+}
+
+body {
+  
+  
+  
+    background-image: url('/static/AdamsX-men.jpg');  /* Path to the image */
+    background-size: cover;  /* Scale the image to cover the entire screen */
+    background-repeat: no-repeat;  /* Prevent tiling */
+    background-attachment: fixed; /* Optional: keeps the background fixed during scrolling */
+    background-position: center;  /* Center the image */
+    
+
+
+
+}
+
+
+h1 {
+  color: rgb(239, 8, 8);
+  margin-left: 20px;
+}
+
+p {
+  color: black;
+  margin-left: 30px;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
+}
+

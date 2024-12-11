@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Issue List{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>IssueID</th>
+    <th>Series</th>
+    <th>Year</th>
+    <th>AuthorID</th>
+    <th>ArtistID</th>
+    <th>Issue Number</th>
+    <th>Maintenance</th>
+    
+  </tr>
+  {% for issue in issueList %}
+  <tr>
+    <td>
+      {{issue[0]}}
+    </td>
+    <td>
+      {{issue[1]}}
+    </td>
+    <td>
+      {{issue[2]}}
+    </td>
+    <td>
+      {{issue[3]}}
+    </td>
+    <td>
+      {{issue[4]}}
+    </td>
+    <td>
+      {{issue[5]}}
+    </td>
+    
+    <td>
+    <!--  <a href="?unregister=true&CharacterID={{characterID}}&IssueID={{issue[0]}}">Delete Issue/Character Interaction</a><br /> -->
+    <a href="?CharacterID={{CharacterID}}&IssueID={{issue[0]}}&unregister=true">Unlink Issue</a><br />
+
+
+
+    <a href="?delete=true&IssueID={{issue[0]}}">Delete Issue</a><br />
+      <a href="/Issues-update?IssueID={{issue[0]}}">Change</a>
+    </td>   
+    <td>
+      <!--<a href="/showCharacters?IssueID={{ issue[0] }}&CharacterID={{ CharacterID }}">View characters <br /> in this issue</a><br /> -->
+      <!--<a href="/showCharacters?IssueID={{issue[0]}}">View characters <br /> in this issue</a><br /> -->
+    </td>
+      
+  
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Insert new Issue information here</h2>
+<form action="">
+  IssueID: <input type="text" name="IssueID"><br />
+  SeriesID: <input type="text" name="SeriesID"><br />
+  Year: <input type="text" name="Year"><br />
+  AuthorID: <input type="text" name="Author"><br />
+  ArtistID: <input type="text" name="Artist"><br />
+  Issue Number: <input type="text" name="IssueNumber"><br />
+  <input type="submit" value="Submit">
+</form>
+
+{% if otherIssues %}
+<form method="get" action="/showIssues"> <!--add the to my insert-->
+  <select name="IssueID" required>
+    <option>add to an existing issue</option>
+    {% for otherIssue in otherIssues %}
+    <option value="{{ otherIssue[0] }}">{{otherIssue[1]}} Issue {{otherIssue[5]}} 
+    </option>
+    {% endfor %}
+  </select>
+  <button type="submit" value="IssueID">Add character appearance to selected issue</button>
+  <input type="hidden" name="CharacterID" value="{{ CharacterID }}" />
+</form>
+{% endif %}
+
+    
+{% endblock %}
