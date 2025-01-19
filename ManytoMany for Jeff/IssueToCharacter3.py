@@ -81,10 +81,11 @@ def showIssues():
             print(f"Invalid or missing IssueID: {IssueID}")  # Debugging
 
         # Fetch issues associated with the character
-        mycursor.execute("""SELECT Issue.IssueID, Issue.SeriesID, Issue.Year, ComicCharacter.FirstName, ComicCharacter.LastName 
+        mycursor.execute("""SELECT Issue.IssueID, Series.Title, Issue.Year, Issue.Author, Issue.Artist, Issue.IssueNumber
                             FROM ComicCharacter
                             JOIN Issue_Character ON ComicCharacter.CharacterID = Issue_Character.CharacterID
                             JOIN Issue ON Issue.IssueID = Issue_Character.IssueID
+                            JOIN Series ON Series.SeriesID = Issue.SeriesID
                             WHERE ComicCharacter.CharacterID = %s""", (CharacterID,))
         issues = mycursor.fetchall()
         print(f"Issues fetched for CharacterID {CharacterID}: {issues}")  # Debugging
@@ -105,6 +106,7 @@ def showIssues():
             comicCharacterName = "Unknown"
             otherIssues = None
         pageTitle = f"Showing all issues for comic character: {comicCharacterName}"
+
     else:
         # Show all issues if no characterID is provided
         mycursor.execute("""SELECT Issue.IssueID, Issue.SeriesID, Issue.Year, Issue.Author, Issue.Artist, Issue.IssueNumber 
@@ -128,4 +130,4 @@ def showIssues():
                            )
 
 if __name__ == '__main__':
-    app.run(port=4000, debug=True, host="0.0.0.0")
+    app.run(port=8000, debug=True, host="0.0.0.0")

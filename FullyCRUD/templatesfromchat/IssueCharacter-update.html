@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Section Info{% endblock %}
+
+
+{% block content %}
+
+
+<form action="">
+  <h2>Information for Section {{section_id}} <input type="hidden" name="section_id" value="{{section_id}}"><br /></h2>
+  Course Name: {{course_name}}<br />
+  Course Code: {{course_code}}<br />
+  Meeting Time: <input type="text" name="meeting_time" value="{{meeting_time}}"><br />
+  Meeting Days: <input type="text" name="meeting_days" value="{{meeting_days}}"><br />
+  Meeting Room: <input type="text" name="meeting_room" value="{{meeting_room}}"><br />
+  <input type="submit" value="Update Information">
+</form>
+
+<h2>Registered students</h2>
+
+<table>
+  <tr>
+    <th>Student ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+  </tr>
+{% for student in registeredStudents%}
+  <tr>
+    <td>{{student[0]}}</td>
+    <td>{{student[1]}}</td>
+    <td>{{student[2]}}</td>
+    <td><a href="student-info?student_id={{student[0]}}">View Student</a></td>
+    <td><a href="section-info?remove_student_id={{student[0]}}&section_id={{section_id}}">Unregister Student</a></td>
+  </tr>
+{% endfor %}
+</table>
+{% endblock %}

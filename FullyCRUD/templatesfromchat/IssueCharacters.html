@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+<h1>Characters in Issue {{ IssueID }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Character ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Monicker</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for character in characters %}
+        <tr>
+            <td>{{ character.CharacterID }}</td>
+            <td>{{ character.FirstName }}</td>
+            <td>{{ character.LastName }}</td>
+            <td>{{ character.Monicker }}</td>
+            <td>
+                <a href="/unregister-character?IssueID={{ IssueID }}&CharacterID={{ character.CharacterID }}">Unregister</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/showIssues">Back to Issues</a>

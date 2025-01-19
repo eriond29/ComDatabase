@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+Sakila Actors
+{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Maintenance</th>
+  </tr>
+  {% for row in collection %}
+  <tr>
+    <td>
+      {{row[0]}}
+    </td>
+    <td>
+      {{row[1]}}
+    </td>
+    <td>
+      {{row[2]}}
+    </td>
+    <td>
+      <a href="?delete=true&id={{row[0]}}">Delete</a><br />
+      <a href="/updateActor?id={{row[0]}}">Change</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+<h2>Enter a new value here</h2>
+<form action="">
+  First Name: <input type="text" name="first_name" /><br />
+  Last Name: <input type="text" name="last_name" /><br />
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}

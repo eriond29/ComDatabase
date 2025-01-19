@@ -1,21 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}{{pageTitle}}{% endblock %}
-{% block title %}Character List{% endblock %}
-
-
-<head>
-    <style>
-        body {
-            background-image: url('{{ url_for("static", filename="MarvelCollage.jpg") }}'); /* Flask template code */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh; /* Ensure the body takes the full height of the viewport */
-            margin: 0; /* Remove default margin */
-        }
-    </style>
-</head>
+{% block title %}Showing Characters{% endblock %}
 
 {% block content %}
 
@@ -25,7 +11,7 @@
     <th>First Name</th>
     <th>Last Name</th>
     <th>Monicker</th>
-    <th>Modify</th>
+    <th>Maintenance</th>
 
   </tr>
   {% for row in ComicCharacterList %}
@@ -44,10 +30,10 @@
     </td>
     <td>
       <a href="?delete=true&CharacterID={{row[0]}}">Delete</a><br />
-      <a href="/ComicCharacter-update?CharacterID={{row[0]}}">Update</a>
+      <a href="/ComicCharacter-update?CharacterID={{row[0]}}">Change</a>
     </td>   
     <td>
-      <a href="/showIssues?CharacterID={{row[0]}}">View Issues this <br />character has appeared in</a><br />
+      <a href="/showIssues?CharacterID={{row[0]}}">View Issues this character has appeared in</a><br />
     </td>
   </tr>
   {% endfor %}

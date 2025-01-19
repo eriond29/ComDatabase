@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block header %}{{pageTitle}}{% endblock %}
-{% block title %}Issue List{% endblock %}
+{% block title %}Showing Issues{% endblock %}
 
 {% block content %}
 
 <table>
   <tr>
     <th>IssueID</th>
-    <th>Series</th>
+    <th>SeriesID</th>
     <th>Year</th>
     <th>AuthorID</th>
     <th>ArtistID</th>
@@ -38,23 +38,12 @@
     </td>
     
     <td>
-    <!--  <a href="?unregister=true&CharacterID={{characterID}}&IssueID={{issue[0]}}">Delete Issue/Character Interaction</a><br /> -->
-    <a href="?CharacterID={{CharacterID}}&IssueID={{issue[0]}}&unregister=true">Unlink Issue</a><br />
-
-
-
-    <a href="?delete=true&IssueID={{issue[0]}}">Delete Issue</a><br />
+      <a href="?delete=true&IssueID={{issue[0]}}">Delete</a><br />
       <a href="/Issues-update?IssueID={{issue[0]}}">Change</a>
     </td>   
     <td>
       <!--<a href="/showCharacters?IssueID={{ issue[0] }}&CharacterID={{ CharacterID }}">View characters <br /> in this issue</a><br /> -->
-     <!-- <a href="/showIssues?IssueID={{issue[0]}}">View characters <br /> in this issue</a><br /> -->
-    <!-- <a href="/showIssues?IssueID={{ issue[0] }}{% if CharacterID %}&CharacterID={{ CharacterID }}{% endif %}">
-      View characters <br /> in this issue -->
-  </a>
-  
-    </a><br />
-    
+      <!--<a href="/showCharacters?IssueID={{issue[0]}}">View characters <br /> in this issue</a><br /> -->
     </td>
       
   
@@ -78,7 +67,7 @@
   <select name="IssueID" required>
     <option>add to an existing issue</option>
     {% for otherIssue in otherIssues %}
-    <option value="{{ otherIssue[0] }}">{{otherIssue[1]}} Issue {{otherIssue[5]}} 
+    <option value="{{ otherIssue[0] }}">{{otherIssue[1]}} Issue {{otherIssue[2]}} 
     </option>
     {% endfor %}
   </select>
@@ -87,5 +76,4 @@
 </form>
 {% endif %}
 
-    
 {% endblock %}

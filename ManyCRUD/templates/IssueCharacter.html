@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Showing Sections{% endblock %}
+
+
+{% block content %}
+<table>
+  <tr>
+    <th>Section ID</th>
+    <th>Course Name</th>
+    <th>Course Code</th>
+    <th>Meeting Time</th>
+    <th>Meeting Days</th>
+    <th>Meeting Room</th>
+  </tr>
+  {% for row in sectionList %}
+  <tr>
+    <td>
+      {{row[0]}}
+    </td>
+    <td>
+      {{row[1]}}
+    </td>
+    <td>
+      {{row[2]}}
+    </td>
+    <td>
+      {{row[3]}}
+    </td>
+    <td>
+      {{row[4]}}
+    </td>
+    <td>
+      <a href="/section-info?section_id={{row[0]}}">View Section</a><br />
+      <a href="/sections?delete_section_id={{row[0]}}">Delete Section</a><br />
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+<h3>Add new section</h3>
+<form action="">
+  Section ID: <input name="new_section_id" ><br />
+  Course: <select id="course_id" name="new_course_id">
+    {% for course in allCourses %}
+    <option value="{{course[0]}}">{{course[2]}} - {{course[1]}}</option>
+    {% endfor %}
+  </select><br />
+  Meeting time: <input name="new_meeting_time"> <br />
+  Meeting Days: <input name="new_meeting_days"> <br />
+  Meeting Room: <input name="new_meeting_room"> <br />
+  
+  <input type="submit" value="Add Section">
+</form>
+{% endblock %}

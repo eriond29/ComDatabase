@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block header %}{{pageTitle}}{% endblock %}
+{% block title %}Showing Issues{% endblock %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>IssueID</th>
+    <th>SeriesID</th>
+    <th>Year</th>
+    <th>AuthorID</th>
+    <th>ArtistID</th>
+    <th>Issue Number</th>
+    <th>Maintenance</th>
+  </tr>
+  {% for issue in issueList %}
+  <tr>
+    <td>{{ issue[0] }}</td>
+    <td>{{ issue[1] }}</td>
+    <td>{{ issue[2] }}</td>
+    <td>{{ issue[3] }}</td>
+    <td>{{ issue[4] }}</td>
+    <td>{{ issue[5] }}</td>
+    <td>
+      <a href="?delete=true&IssueID={{ issue[0] }}">Delete</a><br />
+      <a href="/Issues-update?IssueID={{ issue[0] }}">Change</a>
+    </td>
+    <td>
+      <a href="/show-issue-characters?IssueID={{ issue[0] }}">View Characters</a>
+    </td>
+    <td>
+      <a href="/update-character-issue?OldIssueID={{ issue[0] }}&NewIssueID=<!--EnterNewIssueID-->&CharacterID=<!--EnterCharacterID-->">
+        Update Association
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Insert new Issue information here</h2>
+<form method="get" action="/showIssues">
+  IssueID: <input type="text" name="IssueID"><br />
+  SeriesID: <input type="text" name="SeriesID"><br />
+  Year: <input type="text" name="Year"><br />
+  AuthorID: <input type="text" name="Author"><br />
+  ArtistID: <input type="text" name="Artist"><br />
+  Issue Number: <input type="text" name="IssueNumber"><br />
+  <input type="submit" value="Submit">
+</form>
+
+{% if otherIssues %}
+<form method="get" action="/showIssues">
+  <select name="IssueID" required>
+    <option value="" disabled selected>Add to an existing issue</option>
+    {% for otherIssue in otherIssues %}
+    <option value="{{ otherIssue[0] }}">{{ otherIssue[1] }} Issue {{ otherIssue[2] }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Add character appearance to selected issue</button>
+  <input type="hidden" name="CharacterID" value="{{ CharacterID }}" />
+</form>
+{% endif %}
+
+{% endblock %}
